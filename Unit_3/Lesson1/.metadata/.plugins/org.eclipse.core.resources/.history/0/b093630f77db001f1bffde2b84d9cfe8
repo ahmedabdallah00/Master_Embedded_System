@@ -45,7 +45,7 @@ int main(void)
 		GPIOA_ODR |= 1<<13;
 		for(int i=0;i<50000;i++);
 		GPIOA_ODR &= ~(1<<13);
-		for(int i=0;i<50000;i++);
+		for(i=0;i<50000;i++);
 	}
 	/* Loop forever */
 	for(;;);

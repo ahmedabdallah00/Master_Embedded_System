@@ -37,6 +37,9 @@ default.size.stdout \
 OBJDUMP_LIST += \
 FRIST.list \
 
+OBJCOPY_HEX += \
+FRIST.hex \
+
 OBJCOPY_BIN += \
 FRIST.bin \
 
@@ -60,6 +63,11 @@ FRIST.list: $(EXECUTABLES)
 	@echo 'Finished building: $@'
 	@echo ' '
 
+FRIST.hex: $(EXECUTABLES)
+	arm-none-eabi-objcopy  -O ihex $(EXECUTABLES) "FRIST.hex"
+	@echo 'Finished building: $@'
+	@echo ' '
+
 FRIST.bin: $(EXECUTABLES)
 	arm-none-eabi-objcopy  -O binary $(EXECUTABLES) "FRIST.bin"
 	@echo 'Finished building: $@'
@@ -70,7 +78,7 @@ clean:
 	-$(RM) *
 	-@echo ' '
 
-secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_BIN)
+secondary-outputs: $(SIZE_OUTPUT) $(OBJDUMP_LIST) $(OBJCOPY_HEX) $(OBJCOPY_BIN)
 
 .PHONY: all clean dependents
 .SECONDARY:

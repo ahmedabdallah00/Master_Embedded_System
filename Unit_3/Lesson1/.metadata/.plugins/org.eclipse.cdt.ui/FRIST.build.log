@@ -1,20 +1,13 @@
-15:49:50 **** Incremental Build of configuration Debug for project FRIST ****
+16:05:57 **** Incremental Build of configuration Debug for project FRIST ****
 make -j8 all 
-arm-none-eabi-gcc "../Src/main.c" -mcpu=cortex-m0 -std=gnu11 -g3 -DSTM32 -DSTM32F0 -DDEBUG -DSTM32F030C6Tx -c -I../Inc -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage -MMD -MP -MF"Src/main.d" -MT"Src/main.o" --specs=nano.specs -mfloat-abi=soft -mthumb -o "Src/main.o"
-arm-none-eabi-gcc -o "FRIST.elf" @"objects.list"   -mcpu=cortex-m0 -T"E:\git_rope\Unit 2\Unit_3\Lesson1\FRIST\STM32F030C6TX_FLASH.ld" --specs=nosys.specs -Wl,-Map="FRIST.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
-Finished building target: FRIST.elf
- 
-arm-none-eabi-objdump -h -S  FRIST.elf  > "FRIST.list"
-arm-none-eabi-objcopy  -O binary  FRIST.elf  "FRIST.bin"
 arm-none-eabi-size   FRIST.elf 
+arm-none-eabi-objcopy  -O ihex  FRIST.elf  "FRIST.hex"
    text	   data	    bss	    dec	    hex	filename
     580	      8	   1568	   2156	    86c	FRIST.elf
 Finished building: default.size.stdout
  
-Finished building: FRIST.bin
- 
-Finished building: FRIST.list
+Finished building: FRIST.hex
  
 
-15:49:55 Build Finished. 0 errors, 0 warnings. (took 5s.418ms)
+16:05:57 Build Finished. 0 errors, 0 warnings. (took 204ms)
 

@@ -1,0 +1,12 @@
+#copyright : Ahmed Abdallah
+
+learn-in-depth.bin: UART.c APP.c startup.s
+      arm-none-eabi-as.exe -g -mcpu=arm926ej-s startup.s -o startup.o
+	  arm-none-eabi-gcc.exe -c -g -I . -mcpu=arm926ej-s APP.c -o APP.o
+	  arm-none-eabi-gcc.exe -g -c -I . -mcpu=arm926ej-s UART.c -o UART.o
+	  arm-none-eabi-ld.exe -T linker_script.ld startup.o APP.o UART.o -o learn-in-depth.elf
+	  arm-none-eabi-objcopy.exe -O binary learn-in-depth.elf learn-in-depth.bin
+
+clean:
+    rm *.o *.elf *.bin  
+	  

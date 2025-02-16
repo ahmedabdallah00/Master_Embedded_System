@@ -15,8 +15,8 @@ all: $(Project_name).bin
 %.o: %.s
 	$(CC)as.exe -g -mcpu=arm926ej-s $< -o $@
 	
-%.o: %.c	
-	$(CC)gcc.exe -c -mcpu=arm926ej-s $(INCS)  $< -o $@
+%.o: %.c
+	$(CC)gcc.exe $(CFLAGS) -c $(INCS) $< -o $@
 
 learn-in-depth.elf: linker_script.ld $(OBJ) $(AsOBJ)
 	$(CC)ld.exe -T linker_script.ld $(LIBS) $(OBJ) $(AsOBJ) -o $@ -Map=Map_file.map

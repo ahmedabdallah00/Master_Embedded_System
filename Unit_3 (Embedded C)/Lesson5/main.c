@@ -33,6 +33,28 @@
 #define GPIO_PORTF_DEN_R    (*(volatile unsigned long*)(0x4002551C))
 #define GPIO_PORTF_DATA_R   (*(volatile unsigned long*)(0x400253FC))
 
+
+void *_sbrk(int incr)
+{
+	static unsigned char* heap_ptr=	NULL;
+	unsigned char *prev_heap_ptr= NULL;
+	extern unsigned int _E_bss;
+	extern unsigned int heap_width;
+	if(heap_ptr==NULL)
+		heap_ptr=(unsigned char*)&_E_bss;
+	
+	prev_heap_ptr=heap_ptr;
+	
+	if((heap_ptr + incr)>(&heap_width))
+		return (void*) NULL;
+	
+	heap_ptr+=incr;
+	
+	return (void*) prev_heap_ptr;
+	
+	
+}
+
 int main(void)
 {
 	volatile unsigned long delay_count;

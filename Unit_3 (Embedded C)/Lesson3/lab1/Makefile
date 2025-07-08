@@ -1,26 +1,26 @@
 #copyright : Ahmed Abdallah
 CC=arm-none-eabi-
-CFLAGS=-mcpu=arm926ej-s -g
+CFLAGS=-g -mcpu=arm926ej-s
 INCS=-I .
 LIBS=
-SRC=$(wldcard *.c)
-OBJ=$(SRC: .c=.o)
-As=$(wldcard *.s)
-AsOBJ=$(SRC: .s=.o)
-
+SRC=$(wildcard *.c)
+OBJ=$(SRC:.c=.o)
+As=$(wildcard *.s)
+AsOBJ=$(As:.s=.o)
+project_name=learn-in-depth
 all: learn-in-depth.bin
 	@echo "build is Done"
 	
 %.o: %.s
-	$(CC)as.exe -g -mcpu=arm926ej-s $< -o $@
+	$(CC)as.exe $(CFLAGS) $< -o $@
 	
 %.o: %.c	
-	$(CC).exe -c $(CFLAGS) $(INCS)  $< -o $@
+	$(CC)gcc.exe -c $(CFLAGS) $(INCS)  $< -o $@
 
-learn-in-depth.elf: linker_script.ld $(OBJ) $(AsOBJ)
+$(project_name).elf: linker_script.ld $(OBJ) $(AsOBJ)
 	$(CC)ld.exe -T linker_script.ld $(LIBS) $(OBJ) $(AsOBJ) -o $@
 
-learn-in-depth.bin: learn-in-depth.elf
+$(project_name).bin: $(project_name).elf
 	$(CC)objcopy.exe -O binary $< $@
 
 clean_all:

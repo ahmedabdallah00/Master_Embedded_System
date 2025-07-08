@@ -15,11 +15,20 @@ SECTIONS
            *(.vectors*)
 	       *(.text*)
 	       *(.rodata)
+		   _E_text = . ;
    }> flash   
    .data : {
-           *(.data*)
-   }> flash
+           _S_data = . ;
+		   *(.data*)
+		   . = ALIGN(4) ;
+		   _E_data = . ;
+   }>sram AT> flash
    .bss : {
-          *(.bss)
+          _S_bss = . ;
+		  *(.bss*) 
+		  . = ALIGN(4);
+		  _E_bss = . ;
+		  . = . + 0x1000;
+		  _stack_top = . ;
    }> sram
 }

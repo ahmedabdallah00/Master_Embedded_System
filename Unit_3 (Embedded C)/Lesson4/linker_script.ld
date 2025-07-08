@@ -19,14 +19,16 @@ SECTIONS
    }> flash   
    .data : {
            _S_data = . ;
-		   *(.data)
+		   *(.data*)
 		   . = ALIGN(4) ;
 		   _E_data = . ;
    }>sram AT> flash
    .bss : {
           _S_bss = . ;
-		  *(.bss*)
-		  . = ALIGN(4) ;
+		  *(.bss*) 
+		  . = ALIGN(4);
 		  _E_bss = . ;
+		  . = . + 0x1000;
+		  _stack_top = . ;
    }> sram
 }

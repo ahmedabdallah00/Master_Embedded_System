@@ -1,0 +1,9 @@
+07:02:21 **** Build of configuration Release for project LIFO ****
+make all 
+Building file: ../main.c
+Invoking: Cross GCC Compiler
+gcc -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.o" -o "main.o" "../main.c"
+make: *** [main.o] Error -1073741502
+
+07:02:34 Build Finished (took 12s.505ms)
+
